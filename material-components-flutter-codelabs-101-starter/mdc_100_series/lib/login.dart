@@ -41,6 +41,23 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 120.0),
             // TODO: Remove filled: true values (103)
             // TODO: Add TextField widgets (101)
+            /// UserName TextField
+            TextField(
+              decoration: const InputDecoration(
+                filled: true,
+                labelText: 'UserName',
+              ),
+            ),
+            const SizedBox(height: 12,),
+            /// PassWord TextField
+            TextField(
+              decoration: const InputDecoration(
+                filled: true,
+                labelText: 'Password',
+              ),
+              /// 입력시 마스킹 표시
+              obscureText: true,
+            ),
             // TODO: Add button bar (101)
           ],
         ),
