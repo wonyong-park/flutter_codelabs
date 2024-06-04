@@ -19,50 +19,14 @@ import 'package:shrine/model/products_repository.dart';
 import 'package:shrine/supplemental/asymmetric_view.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Category category;
 
-  // TODO: Add a variable for Category (104)
+  const HomePage({this.category = Category.all, Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    // TODO: Pass Category variable to AsymmetricView (104)
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            print('Menu button');
-          },
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-        ),
-        title: const Text('SHRINE'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              print('Search button');
-            },
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-          ),
-          IconButton(
-            onPressed: () {
-              print('Filter button');
-            },
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
-            ),
-          ),
-        ],
-      ),
-      body: AsymmetricView(
-        products: ProductsRepository.loadProducts(Category.all),
-      ),
-      resizeToAvoidBottomInset: false,
+    return AsymmetricView(
+      products: ProductsRepository.loadProducts(category),
     );
   }
 
@@ -82,7 +46,6 @@ class HomePage extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         elevation: 0.0,
         child: Column(
-          // TODO: Center items on the card (103)
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
@@ -100,7 +63,6 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    // TODO: Handle overflowing labels (103)
                     Text(
                       product.name,
                       style: theme.textTheme.titleLarge,

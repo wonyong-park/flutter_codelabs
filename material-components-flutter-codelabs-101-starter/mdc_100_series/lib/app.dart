@@ -13,15 +13,30 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/backdrop.dart';
+import 'package:shrine/category_menu_page.dart';
 import 'package:shrine/colors.dart';
 import 'package:shrine/supplemental/cut_corners_border.dart';
 
 import 'home.dart';
 import 'login.dart';
+import 'model/product.dart';
 
-// TODO: Convert ShrineApp to stateful widget (104)
-class ShrineApp extends StatelessWidget {
+class ShrineApp extends StatefulWidget {
   const ShrineApp({Key? key}) : super(key: key);
+
+  @override
+  State<ShrineApp> createState() => _ShrineAppState();
+}
+
+class _ShrineAppState extends State<ShrineApp> {
+  Category _currentCategory = Category.all;
+
+  void _onCategoryTap(Category category) {
+    setState(() {
+      _currentCategory = category;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +45,18 @@ class ShrineApp extends StatelessWidget {
       initialRoute: '/login',
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
-        // TODO: Change to a Backdrop with a HomePage frontLayer (104)
-        '/': (BuildContext context) => const HomePage(),
-        // TODO: Make currentCategory field take _currentCategory (104)
-        // TODO: Pass _currentCategory for frontLayer (104)
-        // TODO: Change backLayer field value to CategoryMenuPage (104)
+        '/': (BuildContext context) => Backdrop(
+          currentCategory: Category.all,
+          frontLayer: HomePage(
+            category: _currentCategory,
+          ),
+          backLayer: CategoryMenuPage(
+            currentCategory: _currentCategory,
+            onCategoryTap: _onCategoryTap,
+          ),
+          frontTitle: Text('SHRINE'),
+          backTitle: Text('MENU'),
+        ),
       },
       theme: _kShrineTheme,
     );
@@ -56,7 +78,6 @@ ThemeData _buildShrineTheme() {
     textSelectionTheme: const TextSelectionThemeData(
       selectionColor: kShrinePink100,
     ),
-    // TODO: Add the icon themes (103)
     inputDecorationTheme: const InputDecorationTheme(
       border: CutCornersBorder(),
       focusedBorder: CutCornersBorder(

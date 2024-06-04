@@ -43,8 +43,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             const SizedBox(height: 120.0),
-            // TODO: Remove filled: true values (103)
-            // TODO: Add TextField widgets (101)
             /// UserName TextField
             TextField(
               controller: _usernameController,
@@ -62,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
               /// 입력시 마스킹 표시
               obscureText: true,
             ),
-            // TODO: Add button bar (101)
             /// OverflowBar와 alignment를 통해 우측 정렬 시켜 버리기
             OverflowBar(
               alignment: MainAxisAlignment.end,
